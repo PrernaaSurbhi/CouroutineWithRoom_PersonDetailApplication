@@ -14,6 +14,12 @@ import java.util.*
  */
 class PersonAdapter(private val personList:MutableList<PersonListItem>):RecyclerView.Adapter<PersonAdapter.PersonAdapterViewHolder>() {
 
+    fun setData(players:List<PersonListItem>){
+        this.personList.clear()
+        this.personList.addAll(players)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonAdapterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.person_item,parent,false)
         return PersonAdapterViewHolder(view)
