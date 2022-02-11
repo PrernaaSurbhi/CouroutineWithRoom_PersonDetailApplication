@@ -18,5 +18,5 @@ interface PersonDao {
     suspend fun insertAllPersonListItem(persons:List<Person>)
 
     @Query("SELECT id, firstName, lastName, country, favorite, imageUrl FROM persons")
-    fun getAllPlayers(): LiveData<List<PersonListItem>>
+    fun getAllPersons(): LiveData<List<PersonListItem>>
 }

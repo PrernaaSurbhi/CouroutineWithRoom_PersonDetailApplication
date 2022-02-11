@@ -35,12 +35,13 @@ abstract class PersonDataBase():RoomDatabase() {
 
         private suspend fun prePopulateDatabase(personDao: PersonDao){
             val jsonString = resource.openRawResource(R.raw.persons).bufferedReader().use{
-                it.readLine()
+                it.readText()
             }
             val typeToken = object : TypeToken<List<Person>>() {}.type
             val personsList = Gson().fromJson<List<Person>>(jsonString,typeToken)
             personDao.insertAllPersonListItem(personsList)
         }
+
     }
 
     companion object{
@@ -62,7 +63,5 @@ abstract class PersonDataBase():RoomDatabase() {
             }
         }
     }
-
-
 
 }
