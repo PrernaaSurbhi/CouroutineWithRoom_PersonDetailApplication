@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CouroutineWithRoom</string>
+    <string name="person_points">%s points</string>
+    <string name="person_age_gender">%d yrs old, (%s)</string>
 </resources>

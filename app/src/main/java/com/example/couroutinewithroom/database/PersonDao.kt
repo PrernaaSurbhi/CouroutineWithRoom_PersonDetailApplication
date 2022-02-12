@@ -1,10 +1,7 @@
 package com.example.couroutinewithroom.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.couroutinewithroom.PersonListItem
 
 /**
@@ -19,4 +16,15 @@ interface PersonDao {
 
     @Query("SELECT id, firstName, lastName, country, favorite, imageUrl FROM persons")
     fun getAllPersons(): LiveData<List<PersonListItem>>
+
+    @Query("SELECT * FROM persons   WHERE id = :id")
+    fun getPerson(id:Int):LiveData<Person>
+
+    @Delete
+    suspend fun delete(person:Person)
+
+    @Update
+    suspend fun updatePerson(person:Person)
+
+
 }

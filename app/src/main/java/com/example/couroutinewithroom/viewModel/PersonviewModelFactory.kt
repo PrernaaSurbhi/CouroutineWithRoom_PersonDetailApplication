@@ -15,7 +15,7 @@ class PersonviewModelFactory(private var application: Application):ViewModelProv
         if(modelClass.isAssignableFrom(PersonViewModel::class.java)){
             return PersonViewModel(application) as T
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
+        throw IllegalArgumentException("Unknown PersonviewModelFactory class")
     }
 
 }

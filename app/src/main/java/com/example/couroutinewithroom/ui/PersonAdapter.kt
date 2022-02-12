@@ -1,5 +1,6 @@
 package com.example.couroutinewithroom
 
+import android.app.Application
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,8 @@ import java.util.*
 /**
  * Created by PrernaSurbhi on 10/02/22.
  */
-class PersonAdapter(private val personList:MutableList<PersonListItem>,private val listener:OnItemClickListener):RecyclerView.Adapter<PersonAdapter.PersonAdapterViewHolder>() {
+class PersonAdapter(private val personList:MutableList<PersonListItem>,private val listener:OnItemClickListener)
+    :RecyclerView.Adapter<PersonAdapter.PersonAdapterViewHolder>() {
 
     fun setData(players:List<PersonListItem>){
         this.personList.clear()
