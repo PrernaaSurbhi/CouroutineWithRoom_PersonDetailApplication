@@ -1,5 +1,6 @@
 package com.example.couroutinewithroom
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import java.util.*
 /**
  * Created by PrernaSurbhi on 10/02/22.
  */
-class PersonAdapter(private val personList:MutableList<PersonListItem>):RecyclerView.Adapter<PersonAdapter.PersonAdapterViewHolder>() {
+class PersonAdapter(private val personList:MutableList<PersonListItem>,private val listener:OnItemClickListener):RecyclerView.Adapter<PersonAdapter.PersonAdapterViewHolder>() {
 
     fun setData(players:List<PersonListItem>){
         this.personList.clear()
@@ -43,6 +44,7 @@ class PersonAdapter(private val personList:MutableList<PersonListItem>):Recycler
         }
 
         holder.favPerson.setImageResource(resourceId)
+        holder.bind(person,listener)
     }
 
     override fun getItemCount(): Int {
@@ -54,5 +56,16 @@ class PersonAdapter(private val personList:MutableList<PersonListItem>):Recycler
         val personName: TextView = itemView.findViewById(R.id.person_name_tv)
         val personCountry: TextView = itemView.findViewById(R.id.person_country_tv)
         val favPerson: ImageView = itemView.findViewById(R.id.fav_person)
+
+        fun bind(personListItem:PersonListItem,listener:OnItemClickListener){
+            itemView.setOnClickListener {
+               listener.onItemClicked(personListItem)
+               Log.d("list0001","list item selected")
+            }
+        }
+    }
+
+    interface OnItemClickListener{
+        fun onItemClicked(personListItem:PersonListItem)
     }
 }

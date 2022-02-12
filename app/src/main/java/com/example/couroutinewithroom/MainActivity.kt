@@ -1,17 +1,20 @@
 package com.example.couroutinewithroom
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.couroutinewithroom.database.DetailFragment
 import com.example.couroutinewithroom.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),PersonAdapter.OnItemClickListener {
     private lateinit var personViewModel: PersonViewModel
     private lateinit var personAdapter: PersonAdapter
     private lateinit var personviewModelFactory: PersonviewModelFactory
@@ -30,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         personViewModel =
             ViewModelProvider(this, personviewModelFactory).get(PersonViewModel::class.java)
         personViewModel.getallPersonsList().observe(this, Observer<List<PersonListItem>> { personListItem ->
-            personAdapter = PersonAdapter(personListItem as MutableList<PersonListItem>)
+            personAdapter = PersonAdapter(personListItem as MutableList<PersonListItem>,this)
             binding.recyclerView.adapter = personAdapter
           //  personAdapter.setData(personListItem)
         })
@@ -38,5 +41,10 @@ class MainActivity : AppCompatActivity() {
 //        personAdapter = PersonAdapter(mutableListOf())
 
 
+    }
+
+    override fun onItemClicked(personListItem: PersonListItem) {
+        val fragment = DetailFragment.newInstance(personListItem)
+        fragment.show(supportFragmentManager, "DetailsFragment")
     }
 }
