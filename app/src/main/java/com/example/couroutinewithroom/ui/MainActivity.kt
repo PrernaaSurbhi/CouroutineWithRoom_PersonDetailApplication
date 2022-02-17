@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(),PersonAdapter.OnItemClickListener {
             ViewModelProvider(this, personviewModelFactory).get(PersonViewModel::class.java)
         personViewModel.getallPersonsList().observe(this, Observer<List<PersonListItem>> { personListItem ->
             personAdapter = PersonAdapter(personListItem as MutableList<PersonListItem>,this)
+            binding.recyclerView.setHasFixedSize(true)
             binding.recyclerView.adapter = personAdapter
           //  personAdapter.setData(personListItem)
         })
